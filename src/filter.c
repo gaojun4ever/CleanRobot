@@ -11,7 +11,7 @@ int16_t iirLPF(int16_t in){
   }else{
     for(i=0;i<SHIFT_NUM-1;i++){
       filter_buf[i]=filter_buf[i+1];
-      out+=filter_buf[i]
+      out+=filter_buf[i];
     }
     filter_buf[i]=in;
     out+=filter_buf[i];

@@ -1,3 +1,4 @@
+#include "config.h"
 #include <mpu6050.h>
 
 #define GYRO_LSB 16.1
