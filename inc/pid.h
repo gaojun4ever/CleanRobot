@@ -49,4 +49,4 @@ typedef struct{
   float iLimit;       //< integral limit
   float iLimitLow;    //< integral limit
   float dt;           //< delta-time dt
-}PID_Typedef
+}PID_Typedef;
