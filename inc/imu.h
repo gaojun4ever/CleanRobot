@@ -32,3 +32,5 @@ typedef struct{
 }IMU_Typedef;
 
 IMU_Typedef imuStruct;
+
+void imuUpdate();

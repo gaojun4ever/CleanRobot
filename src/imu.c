@@ -9,6 +9,8 @@ void imuInit(){
 void imuUpdate(){
   readRawGyro(&imuStruct.rawGyro.x, &imuStruct.rawGyro.y, &imuStruct.rawGyro.z);
   readRawAccle(&imuStruct.rawAccel.x, &imuStruct.rawAccel.y, &imuStruct.rawAccel.z);
+  GyroCal();
+  AccelCal();
 }
 
 void GyroCal(){
