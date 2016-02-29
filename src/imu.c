@@ -1,5 +1,5 @@
 #include "imu.h"
-
+#include "MPU6050.h"
 IMU_Typedef imuStruct;
 
 void imuInit(){
@@ -23,5 +23,4 @@ void AccelCal(){
   imuStruct.Accel.x=imuStruct.rawAccel.x/ACCEL_LSB;
   imuStruct.Accel.y=imuStruct.rawAccel.y/ACCEL_LSB;
   imuStruct.Accel.z=imuStruct.rawAccel.z/ACCEL_LSB;
-
 }

@@ -1,4 +1,5 @@
-
+#include "stdint.h"
+#include "config.h"
 
 #define PID_ROLL_RATE_KP  70.0
 #define PID_ROLL_RATE_KI  0.0
