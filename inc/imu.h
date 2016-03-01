@@ -1,8 +1,5 @@
 #include "config.h"
-#include <mpu6050.h>
-#include "filter.h"
-#define GYRO_LSB 16.1
-#define ACCEL_LSB 10
+
 typedef struct{
   int16_t x;
   int16_t y;
