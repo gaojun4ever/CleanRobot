@@ -32,7 +32,7 @@ void AccelCal(){
 void imuUpdate(){
 
   MPU6050GyroRead(&gyroData);
-  MPU6050AccRead(&accData);
+  MPU6050AccRead(&accelData);
   imuStruct.rawGyro.x = gyroData[0];
   imuStruct.rawGyro.y = gyroData[1];
   imuStruct.rawGyro.z = gyroData[2];

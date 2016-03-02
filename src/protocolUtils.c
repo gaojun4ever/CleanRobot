@@ -1,5 +1,4 @@
 #include "protocolUtils.h"
-#include "imu.h"
 #include "usart.h"
 #include "string.h"
 uint8_t cmdByte[32] = {0};
