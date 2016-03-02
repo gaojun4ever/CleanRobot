@@ -14,13 +14,13 @@ void addProtocolCmd(Axis3_Float_Typedef* angle){
     cmdByte[2] = 0x1C;
 
     tmpData = (int16_t) angle->x * 100;
-    memcpy(cmdByte+21, &tmpdata, 2);
+    memcpy(cmdByte+21, &tmpData, 2);
 
     tmpData = (int16_t) angle->y * 100;
-    memcpy(cmdByte+23, &tmpdata, 2);
+    memcpy(cmdByte+23, &tmpData, 2);
 
     tmpData = (int16_t) angle->z * 10;
-    memcpy(cmdByte+25, &tmpdata, 2);
+    memcpy(cmdByte+25, &tmpData, 2);
 
     for(i=0;i<31;i++){
       checkSum+=cmdByte[i];
@@ -32,6 +32,6 @@ void sendDataProtocol(Axis3_Float_Typedef* angle){
   uint8_t i;
   addProtocolCmd(angle);
   for(i=0;i<32;i++){
-    USART_SendChar(USART1,cmdByte);
+    USART_SendChar(USART1,cmdByte[i]);
   }
 }
