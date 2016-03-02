@@ -1,5 +1,7 @@
 #include "mpu6050.h"
 #include "config.h"
+#include "delay.h"
+#include "i2c.h"
 
 /*
 #define MPU6000_ACCEL_DEFAULT_RANGE_G			8
