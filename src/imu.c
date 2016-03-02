@@ -127,6 +127,6 @@ void GetEulerAngle(void)
   imuStruct.eulerAngle.x=atan2(2*(SEq_1*SEq_2+SEq_3*SEq_4),(1-2*(SEq_2*SEq_2+SEq_3*SEq_3)))*57.3;
   imuStruct.eulerAngle.y=asin(2*(SEq_1*SEq_3-SEq_2*SEq_4))*57.3;
   imuStruct.eulerAngle.z=atan2(2*(SEq_1*SEq_4+SEq_2*SEq_3),(1-2*(SEq_4*SEq_4+SEq_3*SEq_3)))*57.3;
-
-  sendDataProtocol(&imuStruct.eulerAngle);
+  printf("%f,%f,%f\n",imuStruct.eulerAngle.x,imuStruct.eulerAngle.y,imuStruct.eulerAngle.z );
+  //sendDataProtocol(&imuStruct.eulerAngle);
 }
