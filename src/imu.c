@@ -124,8 +124,9 @@ void filterUpdate(float w_x, float w_y, float w_z, float a_x, float a_y, float a
 
 void GetEulerAngle(void)
 {
-  imuStruct.eulerAngle.x=asin(-2*SEq_2SEq_4 + 2*SEq_1SEq_3)*57.30f;
-  imuStruct.eulerAngle.y=atan2(2*SEq_3SEq_4 + 2*SEq_1SEq_2, -2*SEq_2SEq_2-2*SEq_3SEq_3 + 1)*57.30f;
-  imuStruct.eulerAngle.z=0;
+  imuStruct.eulerAngle.x=atan2(2*(SEq_1*SEq_2+SEq_3*SEq_4),(1-2*(SEq_2*SEq_2+SEq_3*SEq_3)))*57.3;
+  imuStruct.eulerAngle.y=asin(2*(SEq_1*SEq_3-SEq_2*SEq_4))*57.3;
+  imuStruct.eulerAngle.z=atan2(2*(SEq_1*SEq_4+SEq_2*SEq_3),(1-2*(SEq_4*SEq_4+SEq_3*SEq_3)))*57.3;
+
   sendDataProtocol(&imuStruct.eulerAngle);
 }
