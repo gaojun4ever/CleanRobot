@@ -5,6 +5,8 @@
 #define ACCEL_G_PER_LSB MPU6050_G_PER_LSB_8
 IMU_Typedef imuStruct;
 
+int16_t gyroData[3];
+int16_t accelData[3];
 void imuInit(){
 
 }
@@ -16,7 +18,7 @@ void GyroCal(){
   printf("%f,%f,%f\n",imuStruct.Gyro.x,imuStruct.Gyro.y,imuStruct.Gyro.z );
 }
 
-void GyroCal(){
+void AccelCal(){
   imuStruct.rawAccel.x = iirLPF(imuStruct.rawAccel.x);
   imuStruct.rawAccel.y = iirLPF(imuStruct.rawAccel.y);
   imuStruct.rawAccel.z = iirLPF(imuStruct.rawAccel.z);
@@ -28,8 +30,17 @@ void GyroCal(){
 }
 
 void imuUpdate(){
-  readRawGyro(&imuStruct.rawGyro.x, &imuStruct.rawGyro.y, &imuStruct.rawGyro.z);
-  readRawAccle(&imuStruct.rawAccel.x, &imuStruct.rawAccel.y, &imuStruct.rawAccel.z);
+
+  MPU6050GyroRead(&gyroData);
+  MPU6050AccRead(&accData);
+  imuStruct.rawGyro.x = gyroData[0];
+  imuStruct.rawGyro.y = gyroData[1];
+  imuStruct.rawGyro.z = gyroData[2];
+
+  imuStruct.rawAccel.x = accelData[0];
+  imuStruct.rawAccel.y = accelData[1];
+  imuStruct.rawAccel.z = accelData[2];
+
   GyroCal();
   AccelCal();
 }
