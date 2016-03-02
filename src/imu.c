@@ -5,8 +5,8 @@
 #define ACCEL_G_PER_LSB MPU6050_G_PER_LSB_8
 IMU_Typedef imuStruct;
 
-int16_t gyroData[3];
-int16_t accelData[3];
+int16_t Data[6];
+
 void imuInit(){
 
 }
@@ -31,15 +31,17 @@ void AccelCal(){
 
 void imuUpdate(){
 
-  MPU6050GyroRead(gyroData);
-  MPU6050AccRead(accelData);
-  imuStruct.rawGyro.x = gyroData[0];
-  imuStruct.rawGyro.y = gyroData[1];
-  imuStruct.rawGyro.z = gyroData[2];
+  // MPU6050GyroRead(gyroData);
+  // MPU6050AccRead(accelData);
+  MPU6050_GetRawAccelGyro(&Data);
+  imuStruct.rawAccel.x = Data[0];
+  imuStruct.rawAccel.y = Data[1];
+  imuStruct.rawAccel.z = Data[2];
 
-  imuStruct.rawAccel.x = accelData[0];
-  imuStruct.rawAccel.y = accelData[1];
-  imuStruct.rawAccel.z = accelData[2];
+  imuStruct.rawGyro.x = Data[3];
+  imuStruct.rawGyro.y = Data[4];
+  imuStruct.rawGyro.z = Data[5];
+
 
   GyroCal();
   AccelCal();
