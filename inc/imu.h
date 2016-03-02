@@ -31,5 +31,5 @@ typedef struct{
 extern IMU_Typedef imuStruct;
 
 void imuUpdate(void);
-void filterUpdate(float w_x, float w_y, float w_z, float a_x, float a_y, float a_z);
+void filterUpdate(float gx, float gy, float gz, float ax, float ay, float az, float dt);
 void GetEulerAngle(void);
