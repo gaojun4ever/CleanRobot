@@ -1,5 +1,5 @@
 #include "imu.h"
-#include "mpu6050.h"
+#include "MPU6050.h"
 #include "filter.h"
 #define GYRO_DEG_PER_LSB MPU6050_DEG_PER_LSB_2000
 #define ACCEL_G_PER_LSB MPU6050_G_PER_LSB_8
