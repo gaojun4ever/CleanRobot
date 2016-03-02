@@ -50,3 +50,17 @@ typedef struct{
   float iLimitLow;    //< integral limit
   float dt;           //< delta-time dt
 }PID_Typedef;
+
+void pidInit(PID_Typedef *pid, const float desired, const float kp,const float ki, const float kd, const float dt);
+float pidCalculate(PID_Typedef *pid,float measured);
+void pidSetIntegralLimit(PID_Typedef* pid, const float limit);
+void pidSetIntegralLimitLow(PID_Typedef* pid, const float limitLow);
+void pidReset(PID_Typedef* pid);
+void pidSetError(PID_Typedef* pid, const float error);
+void pidSetDesired(PID_Typedef* pid, const float desired);
+float pidGetDesired(PID_Typedef* pid);
+bool pidIsActive(PID_Typedef* pid);
+void pidSetKp(PID_Typedef* pid, const float kp);
+void pidSetKi(PID_Typedef* pid, const float ki);
+void pidSetKd(PID_Typedef* pid, const float kd);
+void pidSetDt(PID_Typedef* pid, const float dt);

@@ -13,16 +13,18 @@ void GyroCal(){
   imuStruct.Gyro.x = imuStruct.rawGyro.x * GYRO_DEG_PER_LSB;
   imuStruct.Gyro.y = imuStruct.rawGyro.y * GYRO_DEG_PER_LSB;
   imuStruct.Gyro.z = imuStruct.rawGyro.z * GYRO_DEG_PER_LSB;
+  printf("%f,%f,%f\n",imuStruct.Gyro.x,imuStruct.Gyro.y,imuStruct.Gyro.z );
 }
 
-void AccelCal(){
+void GyroCal(){
   imuStruct.rawAccel.x = iirLPF(imuStruct.rawAccel.x);
   imuStruct.rawAccel.y = iirLPF(imuStruct.rawAccel.y);
   imuStruct.rawAccel.z = iirLPF(imuStruct.rawAccel.z);
-  printf("%d,%d,%d\n",imuStruct.rawAccel.x,imuStruct.rawAccel.y,imuStruct.rawAccel.z );
+  //printf("%d,%d,%d\n",imuStruct.rawAccel.x,imuStruct.rawAccel.y,imuStruct.rawAccel.z );
   imuStruct.Accel.x = imuStruct.rawAccel.x * ACCEL_G_PER_LSB;
   imuStruct.Accel.y = imuStruct.rawAccel.y * ACCEL_G_PER_LSB;
   imuStruct.Accel.z = imuStruct.rawAccel.z * ACCEL_G_PER_LSB;
+  //printf("%f,%f,%f\n",imuStruct.Accel.x,imuStruct.Accel.y,imuStruct.Accel.z );
 }
 
 void imuUpdate(){
