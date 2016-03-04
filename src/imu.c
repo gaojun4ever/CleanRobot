@@ -1,16 +1,11 @@
 #include "imu.h"
-#include "MPU6050.h"
+#include "mpu9250.h"
 #include "filter.h"
 #include "protocolUtils.h"
 #include "math.h"
 
-
-  #define BETA_DEF     0.01f    // 2 * proportional gain
-
-
-
-  float beta = BETA_DEF;     // 2 * proportional gain (Kp)
-
+#define BETA_DEF     0.01f    // 2 * proportional gain
+float beta = BETA_DEF;     // 2 * proportional gain (Kp)
 
 float q0 = 1.0f, q1 = 0.0f, q2 = 0.0f, q3 = 0.0f; // estimated orientation quaternion elements with initial conditions
 
@@ -47,6 +42,8 @@ void imuUpdate(){
 
   MPU6050GyroRead(gyroData);
   MPU6050AccRead(accelData);
+  MPU9250_Get3AxisAccelRawData(accelData);
+  MPU9250_Get3AxisGyroRawData(gyroData);
   imuStruct.rawAccel.x = accelData[0];
   imuStruct.rawAccel.y = accelData[1];
   imuStruct.rawAccel.z = accelData[2];
