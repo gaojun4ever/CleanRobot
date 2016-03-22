@@ -1,9 +1,5 @@
 #!/usr/bin/env python
-'''
-Created on November 20, 2010
 
-@author: Dr. Rainer Hessmer
-'''
 import threading
 import serial
 from cStringIO import StringIO
