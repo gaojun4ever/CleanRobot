@@ -162,7 +162,7 @@ class Launchpad_Class(object):
 
 			lineParts = line.split('\t')
 			try:
-				if(lineParts[0] == 'e'):
+				if(lineParts[0] == 'x'):
 					self._left_encoder_value = long(lineParts[1])
 					self._right_encoder_value = long(lineParts[2])
 
@@ -191,7 +191,7 @@ class Launchpad_Class(object):
 					self._Ultrasonic_Value.publish(self._ultrasonic_value)
 #######################################################################################################################
 
-				if(lineParts[0] == 'i'):
+				if(lineParts[0] == 'q'):
 
 					self._qx = float(lineParts[1])
 					self._qy = float(lineParts[2])
@@ -273,11 +273,7 @@ class Launchpad_Class(object):
 
 	def Reset_Launchpad(self):
 		print "Reset"
-		reset = 'r\r'
-		self._WriteSerial(reset)
-		time.sleep(1)
-		self._WriteSerial(reset)
-		time.sleep(2)
+		
 
 
 #######################################################################################################################
@@ -289,7 +285,7 @@ class Launchpad_Class(object):
 
 if __name__ =='__main__':
 	rospy.init_node('launchpad_ros',anonymous=True)
-	launchpad = LaunchNode_Class()
+	launchpad = Launchpad_Class()
 	try:
 
 		launchpad.Start()

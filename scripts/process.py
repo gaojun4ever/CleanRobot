@@ -26,7 +26,7 @@ class DiffTf:
         rospy.loginfo("-I- %s started" % self.nodename)
 
         #### parameters #######
-        self.rate = rospy.get_param('~rate',10.0)  # the rate at which to publish the transform
+        self.rate = rospy.get_param('~rate',50.0)  # the rate at which to publish the transform
 
 
         self.base_frame_id = rospy.get_param('~base_frame_id','base_link') # the name of the base frame of the robot
@@ -59,6 +59,10 @@ class DiffTf:
         rospy.Subscriber("qw", Float32,self.qw_update)
         rospy.Subscriber("th", Float32,self.th_update)
         rospy.Subscriber("scan", LaserScan,self.laser_update)
+        rospy.Subscriber('px',Float32,self.x_update)
+        rospy.Subscriber('py',Float32,self.y_update)
+        rospy.Subscriber('dx',Float32,self.dx_update)
+        #rospy.Subscriber('dr',Float32,self.dr_update)
         self.odomPub = rospy.Publisher("odom", Odometry,queue_size=10)
         self.laserPub = rospy.Publisher("laser_scan", LaserScan,queue_size=20)
         self.odomBroadcaster = TransformBroadcaster()
@@ -96,8 +100,8 @@ class DiffTf:
             quaternion.z = self.qz
             quaternion.w = self.qw
             self.odomBroadcaster.sendTransform(
-                (self.x, self.y, 1),
-                (quaternion.x, quaternion.y, quaternion.z, quaternion.w),
+                (self.x, self.y, 0),
+                (0, 0, quaternion.z, quaternion.w),
                 rospy.Time.now(),
                 self.base_frame_id,
                 self.odom_frame_id
@@ -105,8 +109,8 @@ class DiffTf:
 
 
             self.laserBroadcaster.sendTransform(
-                (self.x, self.y, 0),
-                (0, 0, quaternion.z, quaternion.w),
+                (0, 0, 0),
+                (0, 0, 0, 1),
                 rospy.Time.now(),
                 self.laser_frame_id,
                 self.base_frame_id
@@ -117,12 +121,12 @@ class DiffTf:
             odom = Odometry()
             odom.header.stamp = now
             odom.header.frame_id = self.odom_frame_id
-            odom.pose.pose.position.x = 0
-            odom.pose.pose.position.y = 0
+            odom.pose.pose.position.x = self.x
+            odom.pose.pose.position.y = self.y
             odom.pose.pose.position.z = 0
             odom.pose.pose.orientation = quaternion
             odom.child_frame_id = self.base_frame_id
-            odom.twist.twist.linear.x = 0
+            odom.twist.twist.linear.x = self.dx
             odom.twist.twist.linear.y = 0
             odom.twist.twist.angular.z = self.dr
             self.odomPub.publish(odom)
@@ -153,15 +157,13 @@ class DiffTf:
         self.th = msg.data
     def laser_update(self, msg):
         self.laser=msg
-        # self.laser.angle_min = msg.angle_min
-        # self.laser.angle_max = msg.angle_max
-        # self.laser.angle_increment =msg.angle_increment
-        # self.laser.time_increment= msg.time_increment
-        # self.laser.scan_time = msg.scan_time
-        # self.laser.range_min = msg.range_min
-        # self.laser.range_max = msg.range_max
-        # self.laser.ranges = msg.ranges
-        # self.laser.intensities = msg.intensities
+    def x_update(self, msg):
+        self.x=msg.data
+    def y_update(self, msg):
+        self.y=msg.data
+    def dx_update(self, msg):
+        self.dx=msg.data
+
 
 
 
