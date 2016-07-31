@@ -31,7 +31,7 @@ class LaunchNode_Class(object):
         self._py = 0
         self._dx = 0
         self.key=''
-        self.prekey=''
+
         #
         port = rospy.get_param("~port", "/dev/ttyACM0")
         baudRate = int(rospy.get_param("~baudRate", 115200))
@@ -124,9 +124,8 @@ class LaunchNode_Class(object):
 
     def key_update(self, msg):
         self.key=msg.data
-        if(self.key!=self.prekey):
+        if(self.key!=''):
             self._WriteSerial(self.key+'\r')
-            self.prekey = self.key
 
 
 
